@@ -1,0 +1,47 @@
+@import "variable";
+@import "mixin";
+
+.button {
+    background-color: brown;
+    width: $buttons-width;
+    height: 50px;
+    border-radius: 5px;
+    @include flex(column, center, center, wrap);
+    box-shadow: 0px 5px 0px 0px black;
+    transition-property: all;
+    transition-duration: 0.3s;
+    margin-top: 0;
+    &:hover {
+        cursor: pointer;
+        background-color: bisque;
+        box-shadow: 0px 0px 0px 0px black;
+        margin-top: 5px;
+
+    }
+}
+.active-button {
+    background-color: bisque;
+    box-shadow: 0px 0px 0px 0px black;
+    margin-top: 5px;
+}
+.backspace {
+    width: $buttons-width * 2.4;
+}
+.tab {
+    width: $buttons-width * 1.3;
+}
+.caps-lock {
+    width: $buttons-width * 2;
+}
+.enter {
+    width: $buttons-width * 2.5;
+}
+.ctrl {
+    width: $buttons-width * 1.16;
+}
+.shift {
+    width: $buttons-width * 2.25;
+}
+.space {
+    width: $buttons-width * 7.58;
+}
