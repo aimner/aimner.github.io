@@ -3,10 +3,16 @@ const container = document.createElement('div');
 const textArea = document.createElement('textarea');
 const keyboard = document.createElement('div');
 const keyboardRaws = [['Backspace', '=', '-', '0', '9', '8', '7', '6', '5', '4', '3', '2', '1', '`'],
-  ['Delete', '\\', ']', '[', 'p', 'o', 'i', 'u', 'y', 't', 'r', 'e', 'w', 'q', 'Tab'],
-  ['Enter', '\'', ';', 'l', 'k', 'j', 'h', 'g', 'f', 'd', 's', 'a', 'CapsLock'],
-  ['Shift', 'Up', '/', '.', ',', 'm', 'n', 'b', 'v', 'c', 'x', 'z', 'Shift'],
-  ['Ctrl', 'Right', 'Down', 'Left', 'Alt', ' ', 'Alt', 'Win', 'Ctrl']];
+['Delete', '\\', ']', '[', 'p', 'o', 'i', 'u', 'y', 't', 'r', 'e', 'w', 'q', 'Tab'],
+['Enter', '\'', ';', 'l', 'k', 'j', 'h', 'g', 'f', 'd', 's', 'a', 'CapsLock'],
+['Shift', 'Up', '/', '.', ',', 'm', 'n', 'b', 'v', 'c', 'x', 'z', 'Shift'],
+['Ctrl', 'Right', 'Down', 'Left', 'Alt', ' ', 'Alt', 'Win', 'Ctrl']];
+const lettersShift = [['Backspace', '+', '_', ')', '(', '*', '&', '^', '%', '$', '#', '@', '!', '~'],
+['Delete', '|', '{', '}', 'p', 'o', 'i', 'u', 'y', 't', 'r', 'e', 'w', 'q', 'Tab'],
+['Enter', '\"', ':', 'l', 'k', 'j', 'h', 'g', 'f', 'd', 's', 'a', 'CapsLock'],
+['Shift', 'Up', '?', '>', '<', 'm', 'n', 'b', 'v', 'c', 'x', 'z', 'Shift'],
+['Ctrl', 'Right', 'Down', 'Left', 'Alt', ' ', 'Alt', 'Win', 'Ctrl']];
+
 const buttonsArr = [];
 const letters = [];
 let textOn = true;
@@ -97,22 +103,22 @@ document.addEventListener('keydown', (event) => {
   }
   switch (event.key) {
     case 'Delete':
-            textOn ? delText() : console.log('lol');
+      textOn ? delText() : console.log('lol');
       break;
     case 'Backspace':
-            textOn ? bacText() : console.log('lol');
+      textOn ? bacText() : console.log('lol');
       break;
     case 'Enter':
-            textOn ? textArea.value += '\n' : console.log('lol');
+      textOn ? textArea.value += '\n' : console.log('lol');
       break;
     case 'CapsLock':
-            textOn ? increaseText() : console.log('lol');
+      textOn ? increaseText() : console.log('lol');
       break;
     case ' ':
-            textOn ? textArea.value += ' ' : console.log('lol');
+      textOn ? textArea.value += ' ' : console.log('lol');
       break;
     case 'Shift':
-            textOn ? increaseTextShift(event) : console.log('lol');
+      textOn ? increaseTextShift(event) : console.log('lol');
       break;
   }
 
@@ -132,7 +138,7 @@ document.addEventListener('keyup', (event) => {
   }
   switch (event.key) {
     case 'Shift':
-            textOn ? increaseTextShift(event) : console.log('lol');
+      textOn ? increaseTextShift(event) : console.log('lol');
       break;
   }
 });
@@ -146,11 +152,11 @@ const shift = document.querySelector('.shift');
 let startSub;
 
 
-textArea.onfocus = function() {
+textArea.onfocus = function () {
   textOn = false;
 };
 
-textArea.onblur = function() {
+textArea.onblur = function () {
   textOn = true;
 };
 
@@ -196,13 +202,19 @@ function increaseText() {
 }
 
 function increaseTextShift(event) {
-  letters.forEach((item) => {
-    if (event.type === 'mousedown' || event.type === 'keydown') {
-      item.innerHTML = item.innerHTML.toUpperCase();
-    } else {
-      item.innerHTML = item.innerHTML.toLowerCase();
+  for (let i = 0; i < keyboardRaws.length; i++) {
+    for (let j = 0; j < keyboardRaws[i].length; j++) {
+      buttonsArr[i][j].innerHTML === lettersShift[i][j] ? console.log("lol") : buttonsArr[i][j].innerHTML = lettersShift[i][j];
+      if ((event.type === 'mousedown' || event.type === 'keydown') && buttonsArr[i][j].innerHTML.length <= 1) {
+        buttonsArr[i][j].innerHTML = buttonsArr[i][j].innerHTML.toUpperCase();
+      }
+      if ((event.type === 'mouseup' || event.type === 'keyup') && buttonsArr[i][j].innerHTML.length <= 1) {
+        buttonsArr[i][j].innerHTML = buttonsArr[i][j].innerHTML.toLowerCase();
+        buttonsArr[i][j].innerHTML === keyboardRaws[i][j] ? console.log("lol") : buttonsArr[i][j].innerHTML = keyboardRaws[i][j];
+      }
+
     }
-  });
+  }
 }
 
 function bacText() {
@@ -236,3 +248,5 @@ textArea.addEventListener('click', () => {
   // textArea.selectionStart = textArea.selectionEnd = startSub
 
 });
+
+console.log(letters)
