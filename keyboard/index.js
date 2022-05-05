@@ -2,23 +2,42 @@ const body = document.querySelector('body');
 const container = document.createElement('div');
 const textArea = document.createElement('textarea');
 const keyboard = document.createElement('div');
+const keyBoardcods = [['Backspace', 'Equal', 'Minus', 'Digit0', 'Digit9', 'Digit8', 'Digit7', 'Digit6', 'Digit5', 'Digit4', 'Digit3', 'Digit2', 'Digit1', 'Backquote'],
+  ['Delete', 'Backslash', 'BracketRight', 'BracketLeft', 'KeyP', 'KeyO', 'KeyI', 'KeyU', 'KeyY', 'KeyT', 'KeyR', 'KeyE', 'KeyW', 'KeyQ', 'Tab'],
+  ['Enter', 'Quote', 'Semicolon', 'KeyL', 'KeyK', 'KeyJ', 'KeyH', 'KeyG', 'KeyF', 'KeyD', 'KeyS', 'KeyA', 'CapsLock'],
+  ['ShiftRight', 'ArrowUp', 'Slash', 'Period', 'Comma', 'KeyM', 'KeyN', 'KeyB', 'KeyV', 'KeyC', 'KeyX', 'KeyZ', 'ShiftLeft'],
+  ['ControlRight', 'ArrowRight', 'ArrowDown', 'ArrowLeft', 'AltRight', 'Space', 'AltLeft', 'MetaLeft', 'ControlLeft']];
+
 const keyboardRaws = [['Backspace', '=', '-', '0', '9', '8', '7', '6', '5', '4', '3', '2', '1', '`'],
-['Delete', '\\', ']', '[', 'p', 'o', 'i', 'u', 'y', 't', 'r', 'e', 'w', 'q', 'Tab'],
-['Enter', '\'', ';', 'l', 'k', 'j', 'h', 'g', 'f', 'd', 's', 'a', 'CapsLock'],
-['Shift', 'Up', '/', '.', ',', 'm', 'n', 'b', 'v', 'c', 'x', 'z', 'Shift'],
-['Ctrl', 'Right', 'Down', 'Left', 'Alt', ' ', 'Alt', 'Win', 'Ctrl']];
+  ['Delete', '\\', ']', '[', 'p', 'o', 'i', 'u', 'y', 't', 'r', 'e', 'w', 'q', 'Tab'],
+  ['Enter', '\'', ';', 'l', 'k', 'j', 'h', 'g', 'f', 'd', 's', 'a', 'CapsLock'],
+  ['Shift', 'Up', '/', '.', ',', 'm', 'n', 'b', 'v', 'c', 'x', 'z', 'Shift'],
+  ['Ctrl', 'Right', 'Down', 'Left', 'Alt', ' ', 'Alt', 'Win', 'Ctrl']];
+
+const keyboardRawsRu = [['Backspace', '=', '-', '0', '9', '8', '7', '6', '5', '4', '3', '2', '1', 'ё'],
+  ['Delete', '\\', 'ъ', 'х', 'з', 'щ', 'ш', 'г', 'н', 'е', 'к', 'у', 'ц', 'й', 'Tab'],
+  ['Enter', 'э', 'ж', 'д', 'л', 'о', 'р', 'п', 'а', 'в', 'ы', 'ф', 'CapsLock'],
+  ['Shift', 'Up', '.', 'ю', 'б', 'ь', 'т', 'и', 'м', 'с', 'ч', 'я', 'Shift'],
+  ['Ctrl', 'Right', 'Down', 'Left', 'Alt', ' ', 'Alt', 'Win', 'Ctrl']];
+
 const lettersShift = [['Backspace', '+', '_', ')', '(', '*', '&', '^', '%', '$', '#', '@', '!', '~'],
-['Delete', '|', '{', '}', 'p', 'o', 'i', 'u', 'y', 't', 'r', 'e', 'w', 'q', 'Tab'],
-['Enter', '\"', ':', 'l', 'k', 'j', 'h', 'g', 'f', 'd', 's', 'a', 'CapsLock'],
-['Shift', 'Up', '?', '>', '<', 'm', 'n', 'b', 'v', 'c', 'x', 'z', 'Shift'],
-['Ctrl', 'Right', 'Down', 'Left', 'Alt', ' ', 'Alt', 'Win', 'Ctrl']];
+  ['Delete', '|', '{', '}', 'p', 'o', 'i', 'u', 'y', 't', 'r', 'e', 'w', 'q', 'Tab'],
+  ['Enter', '\"', ':', 'l', 'k', 'j', 'h', 'g', 'f', 'd', 's', 'a', 'CapsLock'],
+  ['Shift', 'Up', '?', '>', '<', 'm', 'n', 'b', 'v', 'c', 'x', 'z', 'Shift'],
+  ['Ctrl', 'Right', 'Down', 'Left', 'Alt', ' ', 'Alt', 'Win', 'Ctrl']];
+const lettersShiftRu = [['Backspace', '+', '_', ')', '(', '*', '?', ':', '%', ';', '№', '"', '!', 'Ё'],
+  ['Delete', '/', 'ъ', 'х', 'з', 'щ', 'ш', 'г', 'н', 'е', 'к', 'у', 'ц', 'й', 'Tab'],
+  ['Enter', 'э', 'ж', 'д', 'л', 'о', 'р', 'п', 'а', 'в', 'ы', 'ф', 'CapsLock'],
+  ['Shift', 'Up', ',', 'ю', 'б', 'ь', 'т', 'и', 'м', 'с', 'ч', 'я', 'Shift'],
+  ['Ctrl', 'Right', 'Down', 'Left', 'Alt', ' ', 'Alt', 'Win', 'Ctrl']];
 
 const buttonsArr = [];
 const letters = [];
 let textOn = true;
+let lang = false;
 
-
-const ButtonsConstructor = class ButClass {
+// BUTTONS CONSTRUCTOR
+class ButClass {
   createContainer() {
     container.className = 'container';
     body.prepend(container);
@@ -34,23 +53,37 @@ const ButtonsConstructor = class ButClass {
       keyboardRaw[i] = document.createElement('div');
       keyboardRaw[i].className = 'keyboard__raw';
       keyboard.append(keyboardRaw[i]);
-      this.createButtons(keyboardRaw[i], keyboardRaws[i]);
+      this.createButtons(keyboardRaw[i], keyboardRaws[i], keyboardRawsRu[i], keyBoardcods[i]);
     }
   }
 
-  createButtons(keyboardRaw, keyboardRaws) {
+  createButtons(keyboardRaw, keyboardRaws, keyboardRawsRu, keyBoardcods) {
     const buttons = [];
     for (let i = 0; i < keyboardRaws.length; i++) {
       buttons[i] = document.createElement('div');
       buttons[i].className = 'button';
+      buttons[i].setAttribute('data-cod', keyBoardcods[i]);
       keyboardRaw.prepend(buttons[i]);
-      buttons[i].innerHTML = keyboardRaws[i];
+      this.createButtonsText(buttons[i], keyboardRaws[i], keyboardRawsRu[i]);
       if (keyboardRaws[i].length === 1) {
         letters.push(buttons[i]);
       }
       this.addClass(buttons[i], keyboardRaws[i]);
     }
     buttonsArr.push(buttons);
+  }
+
+  createButtonsText(button, keyboardRaw, keyboardRawRu) {
+    lang ? button.innerHTML = keyboardRawRu : button.innerHTML = keyboardRaw;
+  }
+
+  changeButtonText() {
+    for (let i = 0; i < keyboardRaws.length; i++) {
+      for (let j = 0; j < keyboardRaws[i].length; j++) {
+        console.log(lang);
+        lang ? buttonsArr[i][j].innerHTML = keyboardRawsRu[i][j] : buttonsArr[i][j].innerHTML = keyboardRaws[i][j];
+      }
+    }
   }
 
   addClass(button, keyboardText) {
@@ -83,21 +116,38 @@ const ButtonsConstructor = class ButClass {
   }
 };
 
-new ButtonsConstructor().createContainer();
+const ButtonsConstructor = new ButClass();
+ButtonsConstructor.createContainer();
 
-
+// TYPE ANG CHANGE TEXT
 letters.forEach((item) => {
   item.addEventListener('click', () => {
     textArea.value += item.textContent;
   });
 });
 
+
+let langFlag = false;
+
 document.addEventListener('keydown', (event) => {
-  console.log(event);
+  console.log(event.code);
+  if (event.key === 'Control') {
+    langFlag = true;
+  }
+  if (event.key === 'Alt' && langFlag) {
+    lang ? lang = false : lang = true;
+    ButtonsConstructor.changeButtonText();
+    langFlag = false;
+  }
+
+
   for (key of buttonsArr) {
     for (item of key) {
-      if (item.textContent === event.key && event.key != 'CapsLock') {
+      if (item.dataset.cod === event.code && event.key != 'CapsLock') {
         item.classList.add('active-button');
+        if (event.key.length === 1 && event.code != 'Space' && textOn) {
+          textArea.value += item.textContent;
+        }
       }
     }
   }
@@ -121,17 +171,12 @@ document.addEventListener('keydown', (event) => {
       textOn ? increaseTextShift(event) : console.log('lol');
       break;
   }
-
-
-  if (event.key.length === 1 && event.code != 'Space' && textOn) {
-    textArea.value += event.key;
-  }
 });
 
 document.addEventListener('keyup', (event) => {
   for (key of buttonsArr) {
     for (item of key) {
-      if (item.textContent === event.key && event.key != 'CapsLock') {
+      if (item.dataset.cod === event.code && event.key != 'CapsLock') {
         item.classList.remove('active-button');
       }
     }
@@ -142,7 +187,8 @@ document.addEventListener('keyup', (event) => {
       break;
   }
 });
-// /////////////////////////////////
+// ADDITIONAL BUTTONS
+
 const del = document.querySelector('.del');
 const backspace = document.querySelector('.backspace');
 const enter = document.querySelector('.enter');
@@ -152,11 +198,11 @@ const shift = document.querySelector('.shift');
 let startSub;
 
 
-textArea.onfocus = function () {
+textArea.onfocus = function() {
   textOn = false;
 };
 
-textArea.onblur = function () {
+textArea.onblur = function() {
   textOn = true;
 };
 
@@ -202,19 +248,45 @@ function increaseText() {
 }
 
 function increaseTextShift(event) {
-  for (let i = 0; i < keyboardRaws.length; i++) {
-    for (let j = 0; j < keyboardRaws[i].length; j++) {
-      buttonsArr[i][j].innerHTML === lettersShift[i][j] ? console.log("lol") : buttonsArr[i][j].innerHTML = lettersShift[i][j];
-      if ((event.type === 'mousedown' || event.type === 'keydown') && buttonsArr[i][j].innerHTML.length <= 1) {
-        buttonsArr[i][j].innerHTML = buttonsArr[i][j].innerHTML.toUpperCase();
+  if(lang){
+    for (let i = 0; i < keyboardRaws.length; i++) {
+      for (let j = 0; j < keyboardRaws[i].length; j++) {
+        buttonsArr[i][j].innerHTML === lettersShiftRu[i][j] ? console.log('lol') : buttonsArr[i][j].innerHTML = lettersShiftRu[i][j];
+        if ((event.type === 'mousedown' || event.type === 'keydown') && buttonsArr[i][j].innerHTML.length <= 1) {
+          buttonsArr[i][j].innerHTML = buttonsArr[i][j].innerHTML.toUpperCase();
+        }
+        if ((event.type === 'mouseup' || event.type === 'keyup') && buttonsArr[i][j].innerHTML.length <= 1) {
+          buttonsArr[i][j].innerHTML = buttonsArr[i][j].innerHTML.toLowerCase();
+          buttonsArr[i][j].innerHTML === keyboardRawsRu[i][j] ? console.log('lol') : buttonsArr[i][j].innerHTML = keyboardRawsRu[i][j];
+        }
       }
-      if ((event.type === 'mouseup' || event.type === 'keyup') && buttonsArr[i][j].innerHTML.length <= 1) {
-        buttonsArr[i][j].innerHTML = buttonsArr[i][j].innerHTML.toLowerCase();
-        buttonsArr[i][j].innerHTML === keyboardRaws[i][j] ? console.log("lol") : buttonsArr[i][j].innerHTML = keyboardRaws[i][j];
+    }
+  } else {
+    for (let i = 0; i < keyboardRaws.length; i++) {
+      for (let j = 0; j < keyboardRaws[i].length; j++) {
+        buttonsArr[i][j].innerHTML === lettersShift[i][j] ? console.log('lol') : buttonsArr[i][j].innerHTML = lettersShift[i][j];
+        if ((event.type === 'mousedown' || event.type === 'keydown') && buttonsArr[i][j].innerHTML.length <= 1) {
+          buttonsArr[i][j].innerHTML = buttonsArr[i][j].innerHTML.toUpperCase();
+        }
+        if ((event.type === 'mouseup' || event.type === 'keyup') && buttonsArr[i][j].innerHTML.length <= 1) {
+          buttonsArr[i][j].innerHTML = buttonsArr[i][j].innerHTML.toLowerCase();
+          buttonsArr[i][j].innerHTML === keyboardRaws[i][j] ? console.log('lol') : buttonsArr[i][j].innerHTML = keyboardRaws[i][j];
+        }
       }
-
     }
   }
+  // for (let i = 0; i < keyboardRaws.length; i++) {
+  //   for (let j = 0; j < keyboardRaws[i].length; j++) {
+  //     buttonsArr[i][j].innerHTML === lettersShift[i][j] ? console.log('lol') : buttonsArr[i][j].innerHTML = lettersShift[i][j];
+  //     if ((event.type === 'mousedown' || event.type === 'keydown') && buttonsArr[i][j].innerHTML.length <= 1) {
+  //       buttonsArr[i][j].innerHTML = buttonsArr[i][j].innerHTML.toUpperCase();
+  //     }
+  //     if ((event.type === 'mouseup' || event.type === 'keyup') && buttonsArr[i][j].innerHTML.length <= 1) {
+  //       buttonsArr[i][j].innerHTML = buttonsArr[i][j].innerHTML.toLowerCase();
+  //       buttonsArr[i][j].innerHTML === keyboardRaws[i][j] ? console.log('lol') : buttonsArr[i][j].innerHTML = keyboardRaws[i][j];
+  //     }
+  //   }
+  // }
 }
 
 function bacText() {
@@ -235,18 +307,4 @@ function delText() {
   textArea.selectionStart = textArea.selectionEnd = startSub;
 }
 
-textArea.addEventListener('click', () => {
-  // startSub = textArea.selectionStart;
-  // const finish = textArea.value.substring(textArea.selectionStart, textArea.value.length);
-  // const start = textArea.value.substring(textArea.value.length[0], textArea.selectionStart);
-  // const newFinish = finish.substring(1, finish.length);
 
-  // console.log(start);
-  // console.log(finish);
-  // console.log(newFinish);
-  // textArea.value = start + newFinish;
-  // textArea.selectionStart = textArea.selectionEnd = startSub
-
-});
-
-console.log(letters)
