@@ -111,6 +111,9 @@ document.addEventListener('keydown', (event) => {
     case ' ':
             textOn ? textArea.value += ' ' : console.log('lol');
       break;
+    case 'Shift':
+            textOn ? increaseTextShift(event) : console.log('lol');
+      break;
   }
 
 
@@ -126,6 +129,11 @@ document.addEventListener('keyup', (event) => {
         item.classList.remove('active-button');
       }
     }
+  }
+  switch (event.key) {
+    case 'Shift':
+            textOn ? increaseTextShift(event) : console.log('lol');
+      break;
   }
 });
 // /////////////////////////////////
@@ -189,7 +197,7 @@ function increaseText() {
 
 function increaseTextShift(event) {
   letters.forEach((item) => {
-    if (event.type === 'mousedown') {
+    if (event.type === 'mousedown' || event.type === 'keydown') {
       item.innerHTML = item.innerHTML.toUpperCase();
     } else {
       item.innerHTML = item.innerHTML.toLowerCase();
