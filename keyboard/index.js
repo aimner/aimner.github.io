@@ -3,7 +3,7 @@ const container = document.createElement('div');
 const textArea = document.createElement('textarea');
 const keyboard = document.createElement('div');
 const whatSistem = document.createElement('div');
-const howChangeLang  = document.createElement('div');
+const howChangeLang = document.createElement('div');
 const keyBoardcods = [['Backspace', 'Equal', 'Minus', 'Digit0', 'Digit9', 'Digit8', 'Digit7', 'Digit6', 'Digit5', 'Digit4', 'Digit3', 'Digit2', 'Digit1', 'Backquote'],
     ['Delete', 'Backslash', 'BracketRight', 'BracketLeft', 'KeyP', 'KeyO', 'KeyI', 'KeyU', 'KeyY', 'KeyT', 'KeyR', 'KeyE', 'KeyW', 'KeyQ', 'Tab'],
     ['Enter', 'Quote', 'Semicolon', 'KeyL', 'KeyK', 'KeyJ', 'KeyH', 'KeyG', 'KeyF', 'KeyD', 'KeyS', 'KeyA', 'CapsLock'],
@@ -131,7 +131,6 @@ letters.forEach((item) => {
     });
 });
 
-
 for (const item of buttonsArr) {
     item.forEach((elem) => {
         elem.addEventListener('mousedown', () => {
@@ -152,7 +151,6 @@ for (const item of buttonsArr) {
     });
 }
 
-
 let langFlag = false;
 
 document.addEventListener('keydown', (event) => {
@@ -165,7 +163,6 @@ document.addEventListener('keydown', (event) => {
         ButtonsConstructor.changeButtonText();
         langFlag = false;
     }
-
 
     for (key of buttonsArr) {
         for (item of key) {
@@ -223,15 +220,13 @@ const space = document.querySelector('.space');
 const shift = document.querySelector('.shift');
 let startSub;
 
-
-textArea.onfocus = function() {
+textArea.onfocus = function () {
     textOn = false;
 };
 
-textArea.onblur = function() {
+textArea.onblur = function () {
     textOn = true;
 };
-
 
 del.addEventListener('click', (event) => {
     delText();
@@ -280,7 +275,6 @@ function increaseTextShift(event) {
     }
 }
 
-
 function increaseTextShiftRu(event) {
     for (let i = 0; i < keyboardRaws.length; i++) {
         for (let j = 0; j < keyboardRaws[i].length; j++) {
@@ -328,5 +322,3 @@ function delText() {
     textArea.value = start + newFinish;
     textArea.selectionStart = textArea.selectionEnd = startSub;
 }
-
-
