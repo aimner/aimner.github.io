@@ -221,7 +221,7 @@ const backspace = document.querySelector('.backspace');
 const enter = document.querySelector('.enter');
 const capsLock = document.querySelector('.caps-lock');
 const space = document.querySelector('.space');
-const shift = document.querySelector('.shift');
+const shift = document.querySelectorAll('.shift');
 let startSub;
 
 textArea.onfocus = function () {
@@ -248,13 +248,19 @@ capsLock.addEventListener('click', (event) => {
     increaseText();
 });
 
-shift.addEventListener('mousedown', (event) => {
-    increaseTextShift(event);
-});
 
-shift.addEventListener('mouseup', (event) => {
-    increaseTextShift(event);
-});
+shift.forEach(item => {
+    item.addEventListener('mousedown', (event) => {
+        increaseTextShift(event);
+    });
+})
+
+
+shift.forEach(item => {
+    item.addEventListener('mouseup', (event) => {
+        increaseTextShift(event);
+    });
+})
 
 space.addEventListener('click', (event) => {
     textArea.value += '';
