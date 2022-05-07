@@ -36,7 +36,7 @@ const lettersShiftRu = [['Backspace', '+', '_', ')', '(', '*', '?', ':', '%', ';
 const buttonsArr = [];
 const letters = [];
 let textOn = true;
-let lang = false;
+let lang = true;
 
 // BUTTONS CONSTRUCTOR
 class ButClass {
@@ -80,7 +80,11 @@ class ButClass {
     }
 
     createButtonsText(button, keyboardRaw, keyboardRawRu) {
-        lang ? button.innerHTML = keyboardRawRu : button.innerHTML = keyboardRaw;
+        if (localStorage.getItem('language') === 'true') {
+            button.innerHTML = keyboardRawRu;
+        } else {
+            button.innerHTML = keyboardRaw;
+        }
     }
 
     changeButtonText() {
@@ -154,12 +158,12 @@ for (const item of buttonsArr) {
 let langFlag = false;
 
 document.addEventListener('keydown', (event) => {
-    console.log(event.code);
     if (event.key === 'Control') {
         langFlag = true;
     }
     if (event.key === 'Alt' && langFlag) {
         lang ? lang = false : lang = true;
+        localStorage.setItem('language', lang);
         ButtonsConstructor.changeButtonText();
         langFlag = false;
     }
