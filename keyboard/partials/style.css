@@ -22,17 +22,14 @@
           box-shadow: 0px 5px 0px 0px black;
   -webkit-transition-property: all;
   transition-property: all;
-  -webkit-transition-duration: 0.3s;
-          transition-duration: 0.3s;
+  -webkit-transition-duration: 0.15s;
+          transition-duration: 0.15s;
   margin-top: 0;
 }
 
 .button:hover {
   cursor: pointer;
   background-color: bisque;
-  -webkit-box-shadow: 0px 0px 0px 0px black;
-          box-shadow: 0px 0px 0px 0px black;
-  margin-top: 5px;
 }
 
 .active-button {
@@ -47,7 +44,7 @@
 }
 
 .tab {
-  width: 65px;
+  width: 55px;
 }
 
 .caps-lock {
@@ -70,11 +67,16 @@
   width: 379px;
 }
 
+.del {
+  width: 60px;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Raleway', sans-serif;
 }
 
 .container {
@@ -116,8 +118,9 @@
       flex-wrap: wrap;
   width: 845px;
   height: 305px;
-  background-color: aqua;
+  background-color: #229292;
   padding: 5px 5px 0 5px;
+  border-radius: 5px;
 }
 
 .keyboard__raw {
