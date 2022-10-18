@@ -2,37 +2,48 @@
 @import "variable";
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Raleway', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway", sans-serif;
+}
+
+body {
+  background-color: rgb(211, 200, 200);
 }
 
 .container {
-    width: 1280px;
-    height: 100vh;
-    margin: 0 auto;
-    @include flex(column, flex-start, center, wrap);
-    
+  width: 1280px;
+  height: 100vh;
+  margin: 0 auto;
+  @include flex(column, center, center, wrap);
 }
 
 .keyboard__container {
-    @include flex(column, flex-start, flex-start, wrap);
-         width: 845px;
-         height: 305px;
-         background-color: rgb(34, 146, 146);
-         padding: 5px 5px 0 5px;
-         border-radius: 5px;
-      
-         
+  @include flex(column, flex-start, flex-start, wrap);
+  width: 845px;
+  height: 305px;
+  background-color: rgb(34, 146, 146);
+  padding: 5px 5px 0 5px;
+  border-radius: 5px;
 }
+
 .keyboard__raw {
-    @include flex(row, flex-start, flex-start, wrap);
-    gap: 5px;
-    height: 60px;
-   
+  @include flex(row, flex-start, flex-start, wrap);
+  gap: 5px;
+  height: 60px;
 }
+
 textarea {
-    width: 400px;
-    height: 300px;
+  outline: none;
+  width: 400px;
+  height: 300px;
+  resize: none;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid rgb(34, 146, 146);
+  margin-bottom: 10px;
+  -webkit-box-shadow: 4px 4px 8px 6px rgba(135, 148, 157, 0.2);
+  -moz-box-shadow: 4px 4px 8px 6px rgba(135, 148, 157, 0.2);
+  box-shadow: 4px 4px 8px 6px rgba(135, 148, 157, 0.2);
 }
