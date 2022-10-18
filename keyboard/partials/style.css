@@ -1,0 +1,114 @@
+.button {
+  background-color: brown;
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0px 5px 0px 0px black;
+  transition-property: all;
+  transition-duration: 0.15s;
+  margin-top: 0;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: bisque;
+}
+
+.active-button {
+  background-color: bisque;
+  box-shadow: 0px 0px 0px 0px black;
+  margin-top: 5px;
+}
+
+.backspace {
+  width: 120px;
+}
+
+.tab {
+  width: 55px;
+}
+
+.caps-lock {
+  width: 100px;
+}
+
+.enter {
+  width: 125px;
+}
+
+.ctrl {
+  width: 58px;
+}
+
+.shift {
+  width: 112.5px;
+}
+
+.space {
+  width: 379px;
+}
+
+.del {
+  width: 60px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Raleway", sans-serif;
+}
+
+body {
+  background-color: rgb(211, 200, 200);
+}
+
+.container {
+  width: 1280px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.keyboard__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 845px;
+  height: 305px;
+  background-color: rgb(34, 146, 146);
+  padding: 5px 5px 0 5px;
+  border-radius: 5px;
+}
+
+.keyboard__raw {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 5px;
+  height: 60px;
+}
+
+textarea {
+  outline: none;
+  width: 400px;
+  height: 300px;
+  resize: none;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid rgb(34, 146, 146);
+  margin-bottom: 10px;
+  box-shadow: 4px 4px 8px 6px rgba(135, 148, 157, 0.2);
+}/*# sourceMappingURL=style.css.map */
